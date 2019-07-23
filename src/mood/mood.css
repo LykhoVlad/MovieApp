@@ -1,0 +1,49 @@
+#chooseMovie{
+    display: none;
+}
+
+#genreCategory{
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: space-around;
+}
+
+#filterCard{
+    display: none;
+}
+
+.primary{
+    background-color: #3883FA;
+    color:white;
+    font-size: 15px;
+    border-style: #1678C2 solid 1px;
+}
+
+.startbut{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.endbut{
+    border-top-right-radius: 35%;
+    border-bottom-right-radius: 35%;
+}
+.moodInfo{
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    z-index: 10;
+}
+
+.filterItem{
+    position: relative;
+    
+}
+
+.filterItem:hover .posterMood{
+    background-color: rgba(0,0,0,.6);
+}
+.filterItem:hover .moodInfo{
+    display: block;
+}
+

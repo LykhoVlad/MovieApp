@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #1E2832;
+}
+
+#menu{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-flow: row, nowrap;
+    background: #000 top center no-repeat / cover;
+    margin: 0;
+    height: 70px;
+}
+
+#filmsContainer{
+    width: 100%;   
+}
+
+#film-details{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+#owl-item{
+    z-index: 999;
+}
+
+#movie{
+    margin: 0 auto;
+}
+
+.owl-prev{
+    left: -10px;
+}
+
+.owl-next{
+    right: -10px;
+}
+
+.owl-next, .owl-prev{
+    position: absolute;
+    top: 30%;
+}
+
+.owl-next span, .owl-prev span{
+    font-size: 60px;
+    color: #000;
+}
+
+.owl-theme .owl-nav [class*='owl-']:hover{
+    background: transparent;
+}
+
+.moreMovies, .moreFilms{
+    display: flex;
+    justify-content: center;
+    flex-flow: column, nowrap;
+}

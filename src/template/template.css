@@ -1,0 +1,74 @@
+#cardFilm{
+    display: none;
+}
+
+.film-card{
+    margin-bottom: 15px;
+}
+
+.film-poster{
+    width: 75%;
+    display: block;
+    margin: auto;
+}
+
+.film-title{
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+.templItem img{
+    width: 30px;
+    height: 30px;
+    filter: grayscale(100%);
+}
+
+.addToMyFavorites{
+    position: absolute;
+    top: 2%;
+    right: 20%
+
+}
+
+.film-likes{
+    position: absolute;
+    bottom: 15%;
+    left: 15%;
+}
+
+.templItem{
+    display: none;
+}
+
+.genre{
+    display: block;
+    font-size: 12px;
+    font-style: italic;
+    color: yellow;
+    text-align: center;
+}
+
+.templItem img.doneFavorites{
+    filter: grayscale(0%);
+}
+
+.raiting{
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    color: yellow;
+    background-color: #3561F8;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.film-card:hover .film-card .film-poster{
+    background: rgba(0,0,0,.6);
+
+}
+
+.film-card:hover .templItem{
+    display: block;  
+}
+

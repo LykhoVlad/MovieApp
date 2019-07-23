@@ -1,0 +1,26 @@
+.modalInfo{
+    display: none;
+    height: 450px;
+    position: relative;
+    z-index: 1000;
+    
+}
+
+.titleInfo{
+    display: block;
+    margin: 0;
+}
+
+.view{
+    display: inline-block;
+}
+
+#close-btn{
+    position: absolute;
+    top: 3%;
+    right: 2%;
+}
+
+.overviewFilm{
+    font-size: 20px;
+}
