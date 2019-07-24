@@ -13,6 +13,7 @@ body{
     background: #000 top center no-repeat / cover;
     margin: 0;
     height: 70px;
+    min-width: 769px;
 }
 
 #filmsContainer{
@@ -32,6 +33,10 @@ body{
 
 #movie{
     margin: 0 auto;
+}
+
+#sliderShow{
+    display: none;
 }
 
 .owl-prev{

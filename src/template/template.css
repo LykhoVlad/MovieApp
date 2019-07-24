@@ -10,6 +10,7 @@
     width: 75%;
     display: block;
     margin: auto;
+    position: relative;
 }
 
 .film-title{
@@ -55,7 +56,7 @@
 
 .raiting{
     position: absolute;
-    top: 70%;
+    top: 65%;
     left: 20%;
     color: yellow;
     background-color: #3561F8;

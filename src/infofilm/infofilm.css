@@ -1,9 +1,8 @@
 .modalInfo{
     display: none;
     height: 450px;
-    position: relative;
-    z-index: 1000;
-    
+    position: fixed;
+    z-index: 1;
 }
 
 .titleInfo{
@@ -13,6 +12,10 @@
 
 .view{
     display: inline-block;
+}
+
+.posterMovie{
+    padding-bottom: 100px;
 }
 
 #close-btn{

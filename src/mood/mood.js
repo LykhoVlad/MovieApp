@@ -6,6 +6,7 @@ import moodCard from './moodCards.html';
 const idSession = localStorage.getItem('id-session');
 const idAccount = localStorage.getItem('id-account');
 var inFavorites = {};
+// OPTIONS FOR FILTERIZR START
 const options = {
   animationDuration: 0.5, // in seconds
   callbacks: { 
@@ -46,9 +47,11 @@ const options = {
     },
   },
 } 
+// OPTIONS FOR FILTERIZR END
+
 export default function getDiscover(type, page){
   $('.yourChoose').html(moodPage);
-  
+// VERIFICATION SESSION ID START
   if(idSession){
     
     $.ajax({
@@ -59,9 +62,14 @@ export default function getDiscover(type, page){
        $.each(films, (i,post) => {
           inFavorites[post.id] = true;
           });
+      },
+      error:function(){
+        alert('The request failed');
       }
   });
   }
+// VERIFICATION SESSION ID END
+// GET FILM DATA AND FILTERIZR START
     $.ajax({
       method: 'GET',
       url: 'https://api.themoviedb.org/3/' + type + '/movie?api_key=a695f6fc2d1d96589625ca90c846019f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page='+page,
@@ -83,15 +91,21 @@ export default function getDiscover(type, page){
              }
                  createCardMood(post);
              });
+             $('.moreMovies').attr('data-current-page', page);
              Filterizr.installAsJQueryPlugin($);
              $('.filter-container').filterizr({
                 options
-            }) ;  
+            }) ; 
+         },
+         error:function(){
+           alert('The request failed');
          }
     })
+
+// GET FILM DATA AND FILTERIZR START
   };
 
-// CREATE INFOFILM MODALWINDOW
+// CREATE INFOFILM MODALWINDOW START
 const createCardMood = (post) =>{
   const postersAdress = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + post.poster_path;
   // const rait = post.vote_average + '/10';
@@ -123,17 +137,29 @@ clonedElement.find(".moodTitle")
 //       .text(movTime);
 
 };
+// CREATE INFOFILM MODALWINDOW END
 
+// EVENTS ON CLICK MENU MOOD START
   $('#mood').click(function(event){
     event.preventDefault();
     $('#sliderShow').css('display','none');
-    getDiscover('discover', 1);
+    for(var page=1; page < 6; page++){
+      getDiscover('discover', page);
+    }
 })
-
+// EVENTS ON CLICK MENU MOOD END
+// EVENTS ADD MORE FILMS ON CLICK START
 $(document).on('click','.moreMovies',function(event){
+  // $('#search-part').css('display','none)
   let page=+$(this).attr('data-current-page')+1;
   let type=$(this).attr('data-type');
   getDiscover(type, page);
   $(this).attr('data-current-page', page);
 })
-
+// EVENTS ADD MORE FILMS ON CLICK END
+// EVENTS ADD CLASS BUTTON ACTIVE ON CLICK START
+$(document).on('click','.primary',function(){
+  $('.primary').removeClass('active');
+  $(this).addClass('active');
+})
+// EVENTS ADD CLASS BUTTON ACTIVE ON CLICK START

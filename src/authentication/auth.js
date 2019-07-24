@@ -1,4 +1,4 @@
-
+// REQUEST AUTHENTICATION START
 function getSuccess(){
     $.ajax({
     method:'GET',
@@ -7,7 +7,9 @@ function getSuccess(){
     const requestKey = data.request_token;
     const sessSuccess = 'https://www.themoviedb.org/authenticate/' + requestKey + '?redirect_to=http://localhost:3000/src';
     window.open(sessSuccess, '_blank');
-console.log(data)
+    },
+    error:function(){
+      alert('The request failed');
     }
 }); 
 };
@@ -15,7 +17,8 @@ console.log(data)
 $(document).on('click','#authSuccess',function(){
     getSuccess();
 });
-
+// REQUEST AUTHENTICATION END
+// GET URL PARAMETRS START
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
@@ -30,11 +33,11 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-
+// GET URL PARAMETRS END
+// REQUEST SESSION ID START
 $(document).ready(function(){
     if(getUrlParameter('approved')){
         let getToken = getUrlParameter('request_token');
-        console.log(getToken)
         var settings = {
             "async": true,
             "crossDomain": true,
@@ -46,7 +49,7 @@ $(document).ready(function(){
             "processData": false,
             "data": "{\"request_token\":\""+getToken+"\"}"
           }
-          
+
           $.ajax(settings).done(function (response) {
             let sessionId = response.session_id;
             localStorage.setItem('id-session', sessionId);
@@ -59,16 +62,15 @@ $(document).ready(function(){
                 "data": "{}"
               }
               
-              $.ajax(settings).done(function (response) {
-                $('#userName').html(response.username).fadeIn();
-                $('#authOut').fadeIn();
-                $('#authSuccess').fadeOut();
-    
+              $.ajax(settings)
+                .done(function (response) {
+                  $('#userName').html(response.username).fadeIn();
+                  $('#authOut').fadeIn();
+                  $('#authSuccess').fadeOut();
               });
           });
     };
-    let idSession = localStorage.getItem('id-session'); 
-    console.log(idSession)
+    let idSession = localStorage.getItem('id-session');
     if(idSession){
         var settings = {
             "async": true,
@@ -79,21 +81,21 @@ $(document).ready(function(){
             "data": "{}"
           }
           
-          $.ajax(settings).done(function (response) {
+          $.ajax(settings)
+          .done(function (response) {
             $('#userName').html(response.username).fadeIn();
             $('#authOut').fadeIn();
             $('#authSuccess').fadeOut();
             localStorage.setItem('id-account', response.id);
-
-          });
-        
+          })
     }
     else {
         $('#userName').html('').fadeOut();
             $('#authOut').fadeOut();
             $('#authSuccess').fadeIn();
     }
-
+// REQUEST SESSION ID END
+// LOG OUT
     $('#authOut').click(function(){
         $('#userName').html('').fadeOut();
             $('#authOut').fadeOut();
