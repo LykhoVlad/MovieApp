@@ -48,15 +48,16 @@ export default function getData(type, page){
           url: 'https://api.themoviedb.org/3/movie/' + type +'?api_key=a695f6fc2d1d96589625ca90c846019f&language=en-US&page=' + page + '&include_adult=false',
         success:(data)=>{
          if(page==1){
+           
            $('#chooseMovie').fadeOut();
           $('#movie').remove();
-          $('#toMenu').remove();
           $('<div></div>').appendTo('#films').attr('id','movie').addClass('container');
           $('<div></div>').appendTo('#movie').attr('id','filmsContainer').addClass('row');
           $('<submit></submit>').appendTo('#movie').addClass('moreFilms').attr('data-current-page', page).attr('data-type', type);
           $('<img src="https://v1.iconsearch.ru/uploads/icons/bnw/128x128/action.png" alt="addMore"></img>').appendTo('.moreFilms').addClass('frame');
           $('<img src="https://v1.iconsearch.ru/uploads/icons/humano2/128x128/old-go-down.png" alt="addMore"></img>').appendTo('.moreFilms').addClass('arrow');
           } ;
+          $('#toMenu').remove();
           $('<a href="#menu" id="toMenu"><img src="https://v1.iconsearch.ru/uploads/icons/darkglass_reworked/128x128/top.png" alt="to Menu"></a>').appendTo('#contentPage');
             const films = data.results;
            $.each(films, (i,post) => {
