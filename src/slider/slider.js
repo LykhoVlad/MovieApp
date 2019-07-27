@@ -7,7 +7,7 @@ import 'owl.carousel';
 export default function getSlider(){
     $.ajax({
         method:'GET',
-        url: 'https://api.themoviedb.org/3/movie/popular?api_key=a695f6fc2d1d96589625ca90c846019f&language=en-US',
+        url: 'https://api.themoviedb.org/3/movie/popular?api_key=a695f6fc2d1d96589625ca90c846019f&language=en-US&page=2',
       success:(data)=>{
           const films = data.results;
          $.each(films, (i,post) => {
@@ -45,6 +45,9 @@ export default function getSlider(){
              .prop("src", imgAdress);
             
             clonedElement.find(".slide-title")
-             .text(post.original_title);
-            }
+             .text(post.title);
+
+            clonedElement.find(".popup")
+             .prop("id", post.id);
+    }
 // CREATE SLIDE CARD END

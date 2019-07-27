@@ -1,27 +1,34 @@
-.modalInfo{
+#modalFilm{
     display: none;
+}
+
+.modalInfo{
     height: 450px;
-    position: fixed;
     z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
 }
 
 .titleInfo{
     display: block;
     margin: 0;
+    top: 10px;
 }
 
 .view{
-    display: inline-block;
-}
-
-.posterMovie{
-    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgba(23, 19, 61, 0.8);
+    color: white; 
+    padding: 20px 0 0 20px;
 }
 
 #close-btn{
     position: absolute;
-    top: 3%;
-    right: 2%;
+    top: 0%;
+    right: 3%;
 }
 
 .overviewFilm{

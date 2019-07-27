@@ -5,7 +5,8 @@ import moodCard from './moodCards.html';
 
 const idSession = localStorage.getItem('id-session');
 const idAccount = localStorage.getItem('id-account');
-var inFavorites = {};
+let inFavorites = {};
+let getGenres = {};
 // OPTIONS FOR FILTERIZR START
 const options = {
   animationDuration: 0.5, // in seconds
@@ -33,7 +34,7 @@ const options = {
   gridItemsSelector: '.filtr-container',
   gutterPixels: 0, // Items spacing in pixels
   layout: 'sameSize', // See layouts
-  multifilterLogicalOperator: 'or',
+  multifilterLogicalOperator: 'and',
   searchTerm: '',
   setupControls: true, // Should be false if controlsSelector is set 
   spinner: { // Configuration for built-in spinner
@@ -69,6 +70,22 @@ export default function getDiscover(type, page){
   });
   }
 // VERIFICATION SESSION ID END
+// GET FILMS GENRES START
+$.ajax({
+  method:'GET',
+  url: 'https://api.themoviedb.org/3/genre/movie/list?api_key=a695f6fc2d1d96589625ca90c846019f&language=en-US',
+  success:(data)=>{
+    const genres = data.genres;
+          $.each(genres, function () {
+            getGenres[$(this)[0].id + ''] = $(this)[0].name;
+         });
+    },
+    error:function(){
+      alert('The request failed');
+    }
+});
+// GET FILMS GENRES END
+
 // GET FILM DATA AND FILTERIZR START
     $.ajax({
       method: 'GET',
@@ -77,13 +94,14 @@ export default function getDiscover(type, page){
         if(page==1){
           $('#chooseMovie').fadeIn();
          $('#movie').remove();
-         $('<div></div>').appendTo('#films').attr('id','movie').addClass('container');
-         $('<div></div>').appendTo('#movie').attr('id','filmsContainer').addClass('row').addClass('filter-container');
+         $('<div></div>').appendTo('#films').attr('id','movie');
+         $('<div></div>').appendTo('#movie').attr('id','filmsContainer').addClass('filter-container');
          $('<submit></submit>').appendTo('#movie').addClass('moreMovies').attr('data-current-page', page).attr('data-type', type);
          $('<img src="https://v1.iconsearch.ru/uploads/icons/bnw/128x128/action.png" alt="addMore"></img>').appendTo('.moreMovies').addClass('frame');
          $('<img src="https://v1.iconsearch.ru/uploads/icons/humano2/128x128/old-go-down.png" alt="addMore"></img>').appendTo('.moreMovies').addClass('arrow');
-        } ;
-        
+        } ; 
+        $('#toMenu').remove();
+        $('<a href="#menu" id="toMenu"><img src="https://v1.iconsearch.ru/uploads/icons/darkglass_reworked/128x128/top.png" alt="to Menu"></a>').appendTo('#contentPage');
            const films = data.results;
           $.each(films, (i,post) => {
              if(inFavorites[post.id]){
@@ -107,38 +125,35 @@ export default function getDiscover(type, page){
 
 // CREATE INFOFILM MODALWINDOW START
 const createCardMood = (post) =>{
+  let str = post.release_date;
+  const yearRelease = str.split("-");
   const postersAdress = 'https://image.tmdb.org/t/p/w300_and_h450_bestv2' + post.poster_path;
-  // const rait = post.vote_average + '/10';
-  // const movTime = 'Runtime: ' + post.runtime + ' min';
   const clonedElement = $(moodCard)
   .prop("id", 'id-' + post.id)
    .appendTo("#filmsContainer")
-   .attr('data-category', post.genre_ids)
-   .attr('data-sort', 'value')
+   .attr('data-category', post.genre_ids + ', ' + yearRelease[0])
+   .attr('data-sort', yearRelease[0]);
 
 clonedElement.find(".posterMood")
    .prop("src", postersAdress);
 
 clonedElement.find(".moodTitle")
-   .text(post.original_title);
+   .text(post.title);
 
-//    var genreName = '';
-//    $.each(data.genres, function(){
-//     genreName = genreName + ' ' + [$(this)[0].name]; 
-//    })
-   
-// clonedElement.find(".genreInfo")
-//       .text(genreName);
-
-// clonedElement.find(".raitFilm")
-//       .text(rait);
-
-// clonedElement.find(".timeFilm")
-//       .text(movTime);
-
+   clonedElement.find(".popup")
+         .prop("id", post.id);
+     
+        if(post.inFavorites){
+          clonedElement.find(".addToMyFavorites")
+            .prop("id", post.id)
+            .addClass('doneFavorites');
+        }
+        else{
+          clonedElement.find(".addToMyFavorites")
+            .prop("id", post.id);
+        }
 };
 // CREATE INFOFILM MODALWINDOW END
-
 // EVENTS ON CLICK MENU MOOD START
   $('#mood').click(function(event){
     event.preventDefault();
@@ -162,4 +177,15 @@ $(document).on('click','.primary',function(){
   $('.primary').removeClass('active');
   $(this).addClass('active');
 })
-// EVENTS ADD CLASS BUTTON ACTIVE ON CLICK START
+// EVENTS ADD CLASS BUTTON ACTIVE ON CLICK END
+
+$(document).on('click', '#getMood', function(){
+  $('#mainPage').remove();
+  $('#contentPage').fadeIn();
+  $('#sliderShow').css('display','none');
+  for(var page=1; page < 6; page++){
+    getDiscover('discover', page);
+    }
+});
+
+

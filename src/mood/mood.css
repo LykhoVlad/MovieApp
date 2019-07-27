@@ -5,49 +5,135 @@
 #genreCategory{
     display: flex;
     flex-flow: row, wrap;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+#emotionCategory{
+    margin-top: 10px;
 }
 
 #filterCard{
     display: none;
 }
 
+.filterItem{
+    position: relative;
+}
+
+.filterItem .addToMyFavorites{
+    display: none;
+    width: 30px;
+    height: 30px;
+    filter: grayscale(100%);
+    position: absolute;
+    top: 2%;
+    right: 5%;
+}
+
+.filterItem img.doneFavorites{
+    filter: grayscale(0%);
+}
+
+.film-name{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    color: white;
+}
+
+.moodTitle{
+    text-align: center;
+    font-size: 23px;
+}
+
 .primary{
-    background-color: #3883FA;
+    background-color: #2185d0;
     color:white;
-    font-size: 15px;
-    border-style: #1678C2 solid 1px;
+    font-size: 17px;
+    border: none;
+    padding: 7px;
+    font-family: 'Capriola', sans-serif;
+    opacity: 0.9;
+}
+
+.primary:active .moreFilms{
+    display: none;
+}
+
+.ui{
+    display: flex;
+    flex-flow: row, wrap;
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
 .startbut{
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
+    border-top-left-radius: 30%;
+    border-bottom-left-radius: 30%;
+    padding: 0 10px;
 }
 .endbut{
-    border-top-right-radius: 35%;
-    border-bottom-right-radius: 35%;
-}
-.moodInfo{
-    display: none;
-    position: absolute;
-    top: 20%;
-    left: 10%;
-    z-index: 10;
-}
-
-.filterItem{
-    position: relative;
-    
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-right: 20px; 
 }
 
 .filterItem:hover .posterMood{
-    background-color: rgba(0,0,0,.6);
+    opacity: 0.2;
 }
-.filterItem:hover .moodInfo{
+
+.filterItem:hover .film-name, .filterItem:hover .addToMyFavorites{
     display: block;
 }
 
-#genreCategory button.active{
+.mood-category{
+    text-align: center;
+    font-family: 'Capriola', sans-serif;
+}
+
+.genreTitle{
+    color: rgb(125, 211, 253);
+    
+}
+
+.gen-mov{
+    background-color: rgb(125, 211, 253);
+}
+
+.emot{
+    background-color: rgb(70, 185, 252);
+}
+
+.emotTitle{
+    color: rgb(70, 185, 252);
+}
+
+.year-mov{
+    background-color: #1A82BF;
+}
+
+.yearTitle{
+    color: #1A82BF;
+}
+
+#genreCategory button:hover, #genreCategory button.active{
     border-style: inset;
-    background-color: purple;
+    background-color: rgb(23, 176, 253);
+    border: none;
+}
+
+#emotionCategory button:hover, #emotionCategory button.active{
+    border-style: inset;
+    background-color: rgb(2, 147, 231);
+    border: none;
+}
+
+#yearsCategory button:hover, #yearsCategory button.active{
+    border-style: inset;
+    background-color: rgb(1, 89, 139);
+    border: none;
 }

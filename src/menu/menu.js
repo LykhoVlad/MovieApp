@@ -88,7 +88,7 @@ const createCard = (posts) => {
        .prop("src", imgAdress);
     
     clonedElement.find(".film-title")
-       .text(posts.original_title);
+       .text(posts.title);
     
        var genresName = '';
        $.each(posts.genre_ids, function(){

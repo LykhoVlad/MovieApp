@@ -5,6 +5,7 @@
     text-transform: uppercase;
     font-size: 18px;
     margin: 0;
+    width: 44%;
 }
 
 .menu-list li{
@@ -15,12 +16,20 @@
 
 .menu-list a{
     text-decoration: none;
-    color: yellow;
+    font-family: 'Capriola', sans-serif;
+    color: #FDB827;
+}
+
+.menuItem:hover{
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 30px; 
+    color: blue;
 }
 
 #logo{
     margin: 5px;
-    font-family: Franklin Gothic Heavy, sans-serif;
+    font-family: 'Franklin Gothic Heavy', sans-serif;
     font-size: 40px;
     display: inline-block;
 }
@@ -32,21 +41,34 @@
     flex-flow: row,nowrap;
     margin: 20px 50px 0 0;
     height: 32px;
+    position: relative;
 }
 
 #searching{
     width:200px;
+    border-radius: 10px; 
 }
 
 #search-btn{
-    width: 32px;
-    position: relative;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -9px;
+    left: 180px;
+    border-radius: 50%;
+    border: none;
+    background-color: #FDB827;
+}
+
+#search-btn img{
+    display: block;
+    margin: auto;
 }
 
 .loupe{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 9px;
+    left: 9px;
 }
 
 #authOut, #userName{

@@ -22,16 +22,22 @@ const createInfoPage = (data) =>{
     const rait = data.vote_average + '/10';
     const movTime = 'Runtime: ' + data.runtime + ' min';
     const backImg = 'https://image.tmdb.org/t/p/w1400_and_h450_face' + data.backdrop_path;
+    let str = data.release_date;
+    const yearRelease = str.split("-");
+    const yearFilm = '(' + yearRelease[0] + ')';
     const clonedElement = $(infoPage)
     .prop("id", 'id-' + data.id)
-    .css('background', 'url('+backImg+')' )
+    .css('background','url('+backImg+')')
      .appendTo("#film-details");
   
   clonedElement.find(".posterMovie")
      .prop("src", posterAdress);
   
   clonedElement.find(".titleInfo")
-     .text(data.original_title);
+     .text(data.title);
+
+  clonedElement.find(".yearFilm")
+      .text(yearFilm);
   
      var genreName = '';
      $.each(data.genres, function(){
@@ -60,12 +66,25 @@ $(document).on('click','.popup', function(e){
       let movieId = $(this).attr('id');
       $('#filmsContainer').css('filter', 'blur(5px)');
       $('.owl-carousel').css({'z-index':'-1','filter':'blur(5px)'});
+      $("body").addClass("modal-opened");
       getInfo(movieId);
     });
     
-    $(document).on('click','#close-btn', function(e){
+    $(document).on('click','#close-btn', function closePopup(e){
       e.preventDefault;
       $('.modalInfo').fadeOut(500);
+      $('#film-details').empty();
       $('#filmsContainer').css('filter', 'none');
       $('.owl-carousel').css({'z-index':'1','filter':'none'});
+      $("body").removeClass("modal-opened");
     });
+
+    $("body").click(function(e) {
+      if($(e.target).closest(".modalInfo").length==0) {
+            $('.modalInfo').fadeOut(500);
+            $('#film-details').empty();
+            $('#filmsContainer').css('filter', 'none');
+            $('.owl-carousel').css({'z-index':'1','filter':'none'});
+            $("body").removeClass("modal-opened");
+      }
+});

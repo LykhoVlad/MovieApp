@@ -11,12 +11,9 @@ import infoStory from './infofilm/infofilm.js';
 import moodStory from './mood/mood.js';
 import authen from './authentication/auth.js';
 import getSlider from './slider/slider.js';
-
-
-
+import mainPage from './mainpage/mainpage.js';
 
 $(document).ready(function(){
-      getSlider();
+  mainPage();    
+  getSlider();
 })
-
- 
